@@ -18,8 +18,6 @@ int partition(int array[], int low, int high) {
 }
 void quicksort(int array[], int low, int high) {
     if (low < high) {
-        // Find pivot element such that elements smaller than pivot are on the left,
-        // and elements greater than pivot are on the right
         int pi = partition(array, low, high);
         quicksort(array, low, pi - 1);
         quicksort(array, pi + 1, high);
