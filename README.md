@@ -1,2 +1,37 @@
-# Dsa-code16
-implement quick sort
+#include <stdio.h>
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+int partition(int array[], int low, int high) {
+    int pivot = array[high]; 
+    int i = (low - 1);
+    for (int j = low; j < high; j++) {
+        if (array[j] <= pivot) {
+            i++; 
+            swap(&array[i], &array[j]);
+        }
+    }
+    swap(&array[i + 1], &array[high]);
+    return (i + 1);
+}
+void quicksort(int array[], int low, int high) {
+    if (low < high) {
+        // Find pivot element such that elements smaller than pivot are on the left,
+        // and elements greater than pivot are on the right
+        int pi = partition(array, low, high);
+        quicksort(array, low, pi - 1);
+        quicksort(array, pi + 1, high);
+    }
+}
+int main() {
+    int arr[] = {4, 8, 3, 2, 5, 7, 1, 9};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    quicksort(arr, 0, n - 1);
+    printf("sorted array : \n");
+    for (int i = 0; i < n; i++) {
+        printf("%d", arr[i]);
+    }
+    return 0;
+}
